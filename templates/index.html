@@ -4,32 +4,154 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Twitter Sentiment Analysis</title>
-  <link rel="stylesheet" href="styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    /* General Styles */
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Poppins', sans-serif;
+      overflow: hidden;
+      background: linear-gradient(135deg, #E1E8ED, #F5F8FA);
+    }
+
+    /* Background Animation */
+    .background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .twitter-logo {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_of_Twitter.svg') no-repeat center/contain;
+      opacity: 0.1;
+      animation: float 10s infinite ease-in-out;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(10deg); }
+      100% { transform: translateY(0) rotate(0deg); }
+    }
+
+    /* Center Content */
+    .container {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      z-index: 1;
+    }
+
+    h1 {
+      font-size: 48px;
+      font-weight: 600;
+      color: #1DA1F2;
+      margin: 0;
+      background: linear-gradient(135deg, #1DA1F2, #0F8BD6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    p {
+      font-size: 20px;
+      color: #657786;
+      margin: 10px 0 30px;
+    }
+
+    /* Search Bar and Button */
+    .search-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 30px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    input[type="text"] {
+      width: 300px;
+      padding: 12px 20px;
+      border: 2px solid #1DA1F2;
+      border-radius: 25px;
+      font-size: 16px;
+      outline: none;
+      background: transparent;
+      color: #14171A;
+      transition: border-color 0.3s ease;
+    }
+
+    input[type="text"]:focus {
+      border-color: #0F8BD6;
+    }
+
+    button {
+      padding: 12px 30px;
+      border: none;
+      border-radius: 25px;
+      background-color: #1DA1F2;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      animation: pulse 2s infinite;
+    }
+
+    button:hover {
+      background-color: #0F8BD6;
+      transform: scale(1.05);
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(29, 161, 242, 0.7); }
+      70% { box-shadow: 0 0 0 15px rgba(29, 161, 242, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(29, 161, 242, 0); }
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <div class="container">
-      <h1>Twitter Sentiment Analysis</h1>
-      <p>Analyze the sentiment of tweets in real-time!</p>
-    </div>
-  </header>
+  <!-- Background Animation -->
+  <div class="background">
+    <div class="twitter-logo" style="top: 10%; left: 5%;"></div>
+    <div class="twitter-logo" style="top: 20%; left: 80%;"></div>
+    <div class="twitter-logo" style="top: 50%; left: 30%;"></div>
+    <div class="twitter-logo" style="top: 70%; left: 60%;"></div>
+    <div class="twitter-logo" style="top: 90%; left: 10%;"></div>
+    <div class="twitter-logo" style="top: 40%; left: 70%;"></div>
+  </div>
 
-  <section class="main-content">
-    <div class="container">
-      <h2>About the Project</h2>
-      <p>
-        This project allows you to analyze the sentiment of tweets based on specific keywords or hashtags. 
-        Whether it's positive, negative, or neutral, our tool will help you understand public opinion on Twitter.
-      </p>
-      <a href="#analyze" class="btn">Get Started</a>
+  <!-- Main Content -->
+  <div class="container">
+    <h1>Twitter Sentiment Analysis</h1>
+    <p>Uncover the Pulse of Social Media</p>
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Enter a hashtag or keyword..." />
+      <button onclick="redirectToPredict()">Analyze</button>
     </div>
-  </section>
+  </div>
 
-  <footer>
-    <div class="container">
-      <p>&copy; 2023 Twitter Sentiment Analysis. All rights reserved.</p>
-    </div>
-  </footer>
+  <script>
+    function redirectToPredict() {
+      const query = document.getElementById('searchInput').value;
+      if (query) {
+        window.location.href = `/predict?query=${encodeURIComponent(query)}`;
+      } else {
+        window.location.href = "/predict";
+      }
+    }
+  </script>
 </body>
 </html>
