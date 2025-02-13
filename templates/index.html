@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Twitter Sentiment Analysis </title>
+    <title>Twitter Sentiment Analysis</title>
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -12,10 +12,10 @@
             text-align: center;
             background: linear-gradient(45deg, #1DA1F2, #000000);
             color: white;
-            overflow-x: hidden;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             min-height: 100vh;
         }
         .preloader {
@@ -41,89 +41,40 @@
             100% { transform: rotate(360deg); }
         }
         header {
-            padding: 20px;
             font-size: 32px;
             font-weight: bold;
             animation: fadeIn 2s ease-in;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        header h1 {
-            margin: 0;
-        }
-        .twitter-bird {
-            font-size: 40px;
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .search-section {
-            margin: 20px;
-            padding: 20px;
-            animation: slideIn 1.5s ease-out;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-        }
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        input {
-            padding: 12px;
-            width: 60%;
-            border-radius: 25px;
-            border: none;
-            transition: 0.3s;
-            font-size: 16px;
-            text-align: center;
-        }
-        input:focus {
-            transform: scale(1.05);
-            outline: none;
+        .button-container {
+            margin-top: 20px;
+            animation: fadeIn 2s ease-in;
         }
         button {
-            padding: 12px 25px;
-            margin-top: 10px;
-            background: white;
-            color: #1DA1F2;
+            padding: 15px 30px;
+            font-size: 18px;
             border: none;
             border-radius: 25px;
+            background: white;
+            color: #1DA1F2;
             cursor: pointer;
             transition: 0.3s;
-            font-size: 16px;
         }
         button:hover {
             background: #004080;
             color: white;
             transform: scale(1.1);
         }
-        .result-section {
-            margin: 20px;
-            padding: 20px;
-            animation: fadeIn 2s ease-in;
-        }
-        footer {
-            padding: 10px;
-            background: rgba(0, 0, 0, 0.2);
-            animation: fadeIn 2s ease-in;
-            margin-top: auto;
-        }
     </style>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             setTimeout(() => document.querySelector(".preloader").style.display = "none", 1500);
         });
-        
-        function analyzeTweet() {
-            const tweet = document.getElementById("tweetInput").value;
-            if (tweet.trim() !== "") {
-                window.location.href = `/predict?tweet=${encodeURIComponent(tweet)}`;
-            } else {
-                alert("Please enter a tweet to analyze.");
-            }
+        function redirectToPredict() {
+            window.location.href = "predict";
         }
     </script>
 </head>
@@ -131,28 +82,11 @@
     <div class="preloader">
         <div class="loader"></div>
     </div>
-    
     <header>
-        <span class="twitter-bird">🐦</span>
         <h1>Twitter Sentiment Analysis</h1>
-        <span class="twitter-bird">🐦</span>
     </header>
-    
-    <main>
-        <section class="search-section">
-            <h2>Analyze Your Tweet</h2>
-            <input type="text" id="tweetInput" placeholder="Enter your tweet...">
-            <button onclick="analyzeTweet()">Analyze</button>
-        </section>
-        
-        <section class="result-section">
-            <h2>Sentiment Result</h2>
-            <p id="sentimentOutput">Enter a tweet to analyze.</p>
-        </section>
-    </main>
-    
-    <footer>
-        <p>© 2025 Twitter Sentiment Analysis. All rights reserved.</p>
-    </footer>
+    <div class="button-container">
+        <button onclick="redirectToPredict()">Analyze</button>
+    </div>
 </body>
 </html>
